@@ -18,9 +18,6 @@ async function run(): Promise<void> {
       }
     } while (m);
 
-    console.log('---------- MATCHED ISSUES ----------');
-    console.log(result)
-
     core.setOutput('issues', result.join(','));
 
   } catch (error) {
