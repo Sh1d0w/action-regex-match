@@ -9,16 +9,19 @@ async function run(): Promise<void> {
     const re = new RegExp(regex, flags);
     let m;
 
-    const output = [];
+    const result = [];
 
     do {
       m = re.exec(text);
       if (m) {
-          ouput.push(m[0]);
+        result.push(m[0]);
       }
     } while (m);
 
-    core.setOutput('issues', output.join(','));
+    console.log('---------- MATCHED ISSUES ----------');
+    console.log(result)
+
+    core.setOutput('issues', result.join(','));
 
   } catch (error) {
     core.error(error);
