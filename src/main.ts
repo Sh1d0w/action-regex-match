@@ -7,23 +7,19 @@ async function run(): Promise<void> {
     const flags = core.getInput('flags');
 
     const re = new RegExp(regex, flags);
+    let m;
 
-    const result = re.exec(text);
+    const output = [];
 
-    if (result) {
-      for (const [index, x] of result.entries()) {
-        if (index === 10) {
-          return;
-        }
-
-        if (index === 0) {
-          core.setOutput('match', x);
-          continue;
-        }
-
-        core.setOutput(`group${index}`, x);
+    do {
+      m = re.exec(text);
+      if (m) {
+          ouput.push(m[0]);
       }
-    }
+    } while (m);
+
+    core.setOutput('issues', output.join(','));
+
   } catch (error) {
     core.error(error);
     core.setFailed(error.message);
